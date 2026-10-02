@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { beliefs, founder } from "../data";
 import { Foot } from "../components/Interior";
+import Wordmark from "../components/Wordmark";
 
 export default function About() {
   return (
@@ -9,7 +10,7 @@ export default function About() {
         <div className="wrap">
           <h1 className="display">We are building a door, and a reason to walk through it</h1>
           <p className="lede">
-            Elan is a small studio in India making plain objects that help people think clearly.
+            <Wordmark /> is a small studio in India making plain objects that help people think clearly.
           </p>
         </div>
       </section>
@@ -17,7 +18,7 @@ export default function About() {
       <section className="story wrap">
         <div className="prose">
           <p>
-            Elan started with a complaint. Everything meant to make you calmer had
+            <Wordmark /> started with a complaint. Everything meant to make you calmer had
             become either an app that wanted your attention or a retreat that
             wanted your belief. Nothing in between: no plain object you could
             keep on a table and use before work.
@@ -56,7 +57,7 @@ export default function About() {
 
       <section className="pagefoot-cta wrap">
         <h2 className="display">The door opens in 2027</h2>
-        <Link className="btn" to="/#waitlist">Join the waitlist</Link>
+        <Link className="btn" to="/#waitlist">See what is coming</Link>
       </section>
 
       <Foot />

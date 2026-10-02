@@ -73,6 +73,17 @@ img { max-width: 100%; display: block; }
 
 .lede { max-width: 54ch; color: var(--muted); font-size: 1.05rem; }
 
+/* ---- the name ----
+   Fraunces carries no Devanagari, so the ई comes from Tiro and is pulled
+   back a little: Devanagari sits taller than Latin caps at the same size.
+   Adjust font-size here if it ever looks too big or too small. */
+.ee {
+  font-family: "Tiro Devanagari Hindi", Fraunces, Georgia, serif;
+  font-size: 0.9em;
+  line-height: 1;
+}
+.ee-rest { letter-spacing: inherit; }
+
 /* ============================================================
    Brand bar
    ============================================================ */
@@ -110,6 +121,10 @@ img { max-width: 100%; display: block; }
 .navlink:hover { color: var(--paper); border-color: rgba(182, 165, 226, 0.7); }
 
 @media (max-width: 780px) { .navlink { display: none; } }
+/* About has no other route on a phone until the footer, so keep it */
+@media (max-width: 780px) and (min-width: 400px) {
+  .navlink-about { display: inline; }
+}
 
 .skip {
   font-size: 0.86rem;
@@ -375,9 +390,10 @@ img { max-width: 100%; display: block; }
 
 .scrollhint {
   position: absolute;
-  bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
-  left: 50%;
-  transform: translateX(-50%);
+  /* sits in the gap under the door, not jammed against the screen edge */
+  bottom: calc(3.5dvh + env(safe-area-inset-bottom, 0px));
+  left: 0; right: 0;
+  text-align: center;
   font-size: 0.76rem;
   letter-spacing: 0.2em;
   color: rgba(182, 165, 226, 0.6);
@@ -580,61 +596,97 @@ img { max-width: 100%; display: block; }
 }
 .plan .where { display: block; color: var(--muted); }
 
-/* --- waitlist --- */
+/* --- the closing notice --- */
 
 .waitlist { text-align: center; }
 .waitlist .band-head { margin-inline: auto; }
 
-.signup {
-  display: flex;
-  gap: 0.7rem;
-  max-width: 470px;
-  margin: 0 auto;
-  flex-wrap: wrap;
-  justify-content: center;
+.comingsoon {
+  display: inline-block;
+  padding: 0.85rem 1.8rem;
+  border: 1px solid rgba(182, 165, 226, 0.45);
+  border-radius: 999px;
+  font-size: 0.92rem;
+  letter-spacing: 0.1em;
+  color: rgba(214, 203, 240, 0.95);
+  background: rgba(182, 165, 226, 0.08);
 }
-.signup input {
-  flex: 1 1 220px;
-  min-width: 0;
-  padding: 0.95rem 1.1rem;
-  font: inherit;
-  font-size: 0.98rem;
-  color: var(--paper);
-  background: rgba(28, 36, 64, 0.7);
-  border: 1px solid rgba(233, 228, 220, 0.2);
-  border-radius: 3px;
+
+.note { margin-top: 1.3rem; font-size: 0.9rem; color: var(--muted); }
+.note a {
+  overflow-wrap: anywhere;
+  color: rgba(233, 228, 220, 0.85);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(182, 165, 226, 0.45);
 }
-.signup input::placeholder { color: rgba(138, 147, 173, 0.85); }
-.signup input:focus { border-color: var(--lilac); outline: none; }
-
-.signup button {
-  padding: 0.95rem 1.5rem;
-  font: inherit;
-  font-size: 0.96rem;
-  color: var(--deepest);
-  background: var(--lilac);
-  border: 0;
-  border-radius: 3px;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-.signup button:hover { background: #C7B8EA; }
-
-.note { margin-top: 1.1rem; font-size: 0.87rem; color: var(--muted); }
-.note.warn { color: #E0A6C4; }
-
-.site-foot a { overflow-wrap: anywhere; color: inherit; text-decoration: none; border-bottom: 1px solid rgba(182, 165, 226, 0.4); }
-.site-foot a:hover { color: var(--paper); }
+.note a:hover { color: var(--paper); }
 
 .site-foot {
-  padding-block: 2.6rem;
   border-top: 1px solid rgba(233, 228, 220, 0.12);
+  color: var(--muted);
+  font-size: 0.88rem;
+}
+
+.foot-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(2rem, 5vw, 4rem);
+  padding-block: clamp(2.6rem, 6vh, 4rem);
+}
+
+.foot-mark {
+  display: block;
+  font-family: Fraunces, Georgia, serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.22em;
+  color: var(--paper);
+  margin-bottom: 0.8rem;
+}
+.foot-brand p { margin: 0; max-width: 32ch; }
+
+.foot-nav {
+  display: grid;
+  gap: 0.7rem;
+  align-content: start;
+}
+.foot-nav a {
+  color: rgba(233, 228, 220, 0.82);
+  text-decoration: none;
+  width: fit-content;
+  border-bottom: 1px solid transparent;
+  padding-bottom: 2px;
+  transition: color 0.3s, border-color 0.3s;
+}
+.foot-nav a:hover { color: var(--paper); border-color: rgba(182, 165, 226, 0.7); }
+
+.foot-reach { display: grid; gap: 0.5rem; align-content: start; }
+.foot-reach span { color: rgba(233, 228, 220, 0.5); }
+.foot-reach a {
+  overflow-wrap: anywhere;
+  color: rgba(233, 228, 220, 0.82);
+  text-decoration: none;
+  border-bottom: 1px solid rgba(182, 165, 226, 0.4);
+}
+.foot-reach a:hover { color: var(--paper); }
+
+.foot-base {
   display: flex;
   justify-content: space-between;
-  gap: 1rem;
   flex-wrap: wrap;
-  color: var(--muted);
-  font-size: 0.86rem;
+  gap: 0.5rem 1rem;
+  padding-block: 1.4rem;
+  border-top: 1px solid rgba(233, 228, 220, 0.1);
+  font-size: 0.8rem;
+  color: rgba(142, 139, 174, 0.8);
+}
+
+@media (max-width: 760px) {
+  .foot-grid {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+  }
+  /* on a phone these links are the main navigation, so give them room */
+  .foot-nav { gap: 1rem; font-size: 0.98rem; }
 }
 
 /* ============================================================

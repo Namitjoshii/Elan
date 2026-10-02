@@ -1,13 +1,15 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
 import { diaries, plans, email as contactEmail } from "../data";
 import CoverArt from "./CoverArt";
 import BookViewer from "./BookViewer";
+import Wordmark from "./Wordmark";
 
 export function Promise_() {
   return (
     <section className="promise wrap">
       <p>
-        Elan makes the small daily things that change how a year feels.
+        <Wordmark /> makes the small daily things that change how a year feels.
         <span> Diaries first, then places to go and be quiet in.</span>
       </p>
     </section>
@@ -86,60 +88,54 @@ export function Programs() {
 }
 
 export function Waitlist() {
-  const [email, setEmail] = useState("");
-  const [state, setState] = useState("idle"); // idle | error | done
-
-  const submit = async () => {
-    if (!/.+@.+\..+/.test(email)) { setState("error"); return; }
-
-    // Swap this for your real backend call when you have one:
-    // await fetch("/api/waitlist", { method: "POST", body: JSON.stringify({ email }) })
-    console.log("waitlist signup:", email);
-
-    setState("done");
-  };
-
   return (
     <section className="band wrap waitlist" id="waitlist">
       <div className="band-head">
         <h2 className="display">The door opens in 2027</h2>
         <p className="lede">
-          Leave your email and you will be the first one through it: the first
-          run of diaries at founding price, and first pick of dates.
+          The first run of diaries is being made now, and the first dates are
+          being set. Nothing to sign up for just yet.
         </p>
       </div>
 
-      {state === "done" ? (
-        <p className="note">You are on the list. We will write to you before anyone else.</p>
-      ) : (
-        <>
-          <div className="signup">
-            <input
-              type="email"
-              value={email}
-              placeholder="you@email.com"
-              aria-label="Your email address"
-              onChange={(e) => { setEmail(e.target.value); setState("idle"); }}
-              onKeyDown={(e) => e.key === "Enter" && submit()}
-            />
-            <button onClick={submit}>Join the waitlist</button>
-          </div>
-          <p className={state === "error" ? "note warn" : "note"}>
-            {state === "error"
-              ? "That address is missing an @ or a dot. Check it and try again."
-              : "One email when we open. Nothing else, ever."}
-          </p>
-        </>
-      )}
+      <p className="comingsoon">Registrations opening soon</p>
+
+      <p className="note">
+        Until then, write to us at{" "}
+        <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+      </p>
     </section>
   );
 }
 
 export function Foot() {
   return (
-    <footer className="site-foot wrap">
-      <span>Elan</span>
-      <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+    <footer className="site-foot">
+      <div className="wrap foot-grid">
+        <div className="foot-brand">
+          <span className="foot-mark"><Wordmark /></span>
+          <p>Diaries built around one habit at a time, and quiet places to go later on.</p>
+        </div>
+
+        {/* On a phone the top nav collapses, so this is the only way
+            to reach the other pages. It is not decoration. */}
+        <nav className="foot-nav" aria-label="Footer">
+          <Link to="/#diaries">Diaries</Link>
+          <Link to="/#programs">Programs</Link>
+          <Link to="/about">About</Link>
+          <Link to="/#waitlist">Opening soon</Link>
+        </nav>
+
+        <div className="foot-reach">
+          <span>Write to us</span>
+          <a href={`mailto:${contactEmail}`}>{contactEmail}</a>
+        </div>
+      </div>
+
+      <div className="wrap foot-base">
+        <span>&copy; {new Date().getFullYear()} <Wordmark /></span>
+        <span>Opening 2027</span>
+      </div>
     </footer>
   );
 }
