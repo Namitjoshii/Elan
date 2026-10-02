@@ -80,7 +80,7 @@ export default function Threshold() {
         </div>
 
         <div className="titleblock">
-          <h1 className="display">Elan</h1>
+          <h1 className="display">ईlan</h1>
           <p>Elevate your mindset</p>
         </div>
 
